@@ -4,5 +4,5 @@
  */
 
 exports.list = function (req, res) {
-    res.send({ result: 'true', data: ["IBM", "SAP", "GS"] });
+    res.send({ companies: ["SAP", "IBM", "GOOGLE"] });
 };

@@ -1,9 +1,21 @@
-
-/*
- * GET home page.
+/**
+ * All the routes goes here
+ * @author Sandeep G
+ * @since 20180222
  */
+app = require('../app');
 
-exports.index = function (req, res) {
-  // res.render('index', { title: 'Express' });
-  res.send({ result: 'true', data: [{ name: "sandeep", school: "army", college: "arya" }] });
-};
+/* now all the route declarations goe here */
+var user = require('./user');
+var company = require('./companies');
+var requestExample = require('./requestExample');
+var database = require('./database');
+
+/* actual routes goes here */
+app.get('/', user.list);
+app.get('/company', company.list);
+app.get('/req', requestExample.demoParams);
+app.get('/req/:name', requestExample.demoParamsWithId);
+
+app.get('/db', database.connectionTest);
+app.get('/db/get', database.getData);

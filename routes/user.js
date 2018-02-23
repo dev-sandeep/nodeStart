@@ -4,5 +4,5 @@
  */
 
 exports.list = function (req, res) {
-  res.send({ result: 'true', data: ["Sandeep", "Abhishek", "Shrey"] });
+  res.send({ users: ["sandeep", "gunjan"] });
 };
