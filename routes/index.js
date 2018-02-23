@@ -19,3 +19,4 @@ app.get('/req/:name', requestExample.demoParamsWithId);
 
 app.get('/db', database.connectionTest);
 app.get('/db/get', database.getData);
+app.get('/db/post', database.postData);
