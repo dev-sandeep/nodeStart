@@ -20,3 +20,8 @@ app.get('/req/:name', requestExample.demoParamsWithId);
 app.get('/db', database.connectionTest);
 app.get('/db/get', database.getData);
 app.get('/db/post', database.postData);
+app.get('/db/query/:item', database.queryParam);
+app.get('/db/update/:id', database.updateData);
+app.get('/db/sort', database.sortData);
+app.get('/db/join', database.joinData);
+app.get('/db/joinm', database.joinDataMustiple);
