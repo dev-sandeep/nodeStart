@@ -24,4 +24,4 @@ app.get('/db/query/:item', database.queryParam);
 app.get('/db/update/:id', database.updateData);
 app.get('/db/sort', database.sortData);
 app.get('/db/join', database.joinData);
-app.get('/db/joinm', database.joinDataMustiple);
+app.get('/db/joinm', database.joinDataMultiple);

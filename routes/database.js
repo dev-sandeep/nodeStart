@@ -54,13 +54,57 @@ exports.postData = function (req, response) {
         var testId = new objectId();
 
         /* the @tobe inserted data goes here */
-        var myobj = {
-            // email: 'allexmclen@mail.com',
-            userId: objectId("5a9816b52774ea4b88eef18e"),
-            role: 'admin'
-        };
+        // 5a9816b52774ea4b88eef18e
+        // 5a99690ce9416f1ec02f12df
+        var myobj = [{
+            role: 'admin',
+            class: 'A',
+            // role: 'client1',
+            // email: 'sandeep@mail.com',
+            // uname: 'sandeep',
+            // userId: testId
+            // userId: objectId("5a9816b52774ea4b88eef18e"),
+            // role: 'client'
+        },
+        {
+            role: 'client',
+            class: 'A',
+            // userId: objectId("5a9816b52774ea4b88eef18e"),
+
+        },
+        {
+            role: 'admin',
+            class: 'B',
+            // userId: objectId("5a9816b52774ea4b88eef18e")
+        },
+        {
+            role: 'admin',
+            class: 'C',
+            // userId: objectId("5a99690ce9416f1ec02f12df")
+        },
+        {
+            role: 'admin',
+            class: 'D',
+            // userId: objectId("5a99690ce9416f1ec02f12df")
+        },
+        {
+            role: 'client',
+            class: 'B',
+            // userId: objectId("5a9816b52774ea4b88eef18e")
+        },
+        {
+            role: 'client',
+            class: 'C',
+            // userId: objectId("5a99690ce9416f1ec02f12df")
+        },
+        {
+            role: 'client',
+            class: 'D',
+            // userId: objectId("5a99690ce9416f1ec02f12df")
+        }];
+        console.log(myobj);
         // myobj = { "productName": "Washing Machine", "Price": "25000", "Brand": "Samsung" };
-        dbo.collection(collectionName).insertOne(myobj, function (err, res) {
+        dbo.collection(collectionName).insertMany(myobj, function (err, res) {
             if (err) throw err;
             console.log("1 document inserted");
             response.send("1 document inserted");
@@ -126,7 +170,7 @@ exports.joinData = function (req, response) {
 /**
  * Example to run a query to join the data and show result from multiple collection
  */
-exports.joinDataMustiple = function (req, response) {
+exports.joinDataMultiple = function (req, response) {
     var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:27017/";
 
@@ -156,8 +200,8 @@ exports.joinDataMustiple = function (req, response) {
             {
                 $lookup: {
                     from: "userrole",
-                    localField: "userId",
-                    foreignField: "userId",
+                    localField: "user_info.class",
+                    foreignField: "class",
                     as: "user_role"
                 }
             },
@@ -166,6 +210,10 @@ exports.joinDataMustiple = function (req, response) {
             // define some conditions here 
             {
                 $match: {
+                    // uname: "allex"
+                    // "user_role.class": "A"
+                    "user_role.role": "admin",
+                    // "user_info.phone": "7894561230"
                     $and: [{ "uname": "allex" }]
                 }
             },
@@ -178,6 +226,7 @@ exports.joinDataMustiple = function (req, response) {
                     uname: 1,
                     phone: "$user_info.phone",
                     role: "$user_role.role",
+                    class: "$user_role.class"
                 }
             }
         ]
